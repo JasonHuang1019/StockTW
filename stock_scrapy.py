@@ -11,20 +11,41 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from webdriver_manager.chrome import ChromeDriverManager
-
 import datetime
+import time
 today=datetime.date.today()
-print(today)
+
+year = today.year
+month = today.month
+day = today.day
+
+day = 7
 
 browser = webdriver.Chrome(ChromeDriverManager().install())
 browser.get("https://www.twse.com.tw/zh/page/trading/exchange/TWT93U.html")
 
 select_year = Select(browser.find_element_by_name("yy"))
-select_year.select_by_value((108))  # 選擇傳入的年份
+select_year.select_by_value(str(year))  # 選擇傳入的年份
 
-select_year = Select(browser.find_elemet_by_name("report-table_length"))
-select_year.select_by_value("-1") 
- 
+select_month = Select(browser.find_element_by_name("mm"))
+select_month.select_by_value(str(month))  # 選擇傳入的年份
+
+select_day = Select(browser.find_element_by_name("dd"))
+select_day.select_by_value(str(day))  # 選擇傳入的年份
+
+time.sleep(2)
+find_button = browser.find_elements_by_xpath("/html/body/div[1]/div[1]/div/div/main/div[2]/div/div/form/a")[0]
+find_button.click()
+
+time.sleep(2)
+select_length = Select(browser.find_element_by_name("report-table_length"))
+select_length.select_by_value("-1") 
+
+
+
+
+#%%
+
 response = requests.get("https://www.twse.com.tw/zh/page/trading/exchange/TWT93U.html")
 soup = BeautifulSoup(response.text, "html.parser")
  
