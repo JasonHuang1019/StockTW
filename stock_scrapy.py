@@ -13,6 +13,9 @@ from selenium.webdriver.support.ui import Select
 from webdriver_manager.chrome import ChromeDriverManager
 import datetime
 import time
+import pandas as pd
+
+
 today=datetime.date.today()
 
 year = today.year
@@ -42,6 +45,19 @@ select_length = Select(browser.find_element_by_name("report-table_length"))
 select_length.select_by_value("-1") 
 
 
+html = browser.page_source
+soup = BeautifulSoup(html,'html.parser')
+
+div = soup.select_one("div#report-table_wrapper")
+table = pd.read_html(str(div))[0]
+
+type(table)
+table.info()
+# table.dropna()
+# table.drop(axis = -1)
+
+table.sort_values([('借券賣出', '當日賣出')], ascending=False)
+table.drop(columns = [('備註', '備註'),])
 
 
 #%%
