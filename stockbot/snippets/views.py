@@ -2,12 +2,15 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer
+from snippets.serializers import SnippetSerializer,StockSerializer
+import requests
 
 #%%
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from snippets.serializers import UserSerializer, GroupSerializer
+
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -24,6 +27,36 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+def Line_Notify(token, message):
+    headers = {"Authorization": "Bearer " + token}
+    param = {'message': message}
+    # image = {'imageFile' : open(str(img), 'rb')}
+    r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = param)
+    return r.status_code
+
+
+#%%
+@csrf_exempt
+def stock_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        token = 'WLZUkcHUYhjAmqdp4OmdIqkaKiaxHZm4XowYIwa5Bx1'
+        message = 'stock test'
+        status = Line_Notify(token, message)
+        status ={'status':status}
+        # serializer = StockSerializer(status, many=True)
+        return JsonResponse(status, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = SnippetSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+    
 #%%
 @csrf_exempt
 def snippet_list(request):
@@ -32,6 +65,7 @@ def snippet_list(request):
     """
     if request.method == 'GET':
         snippets = Snippet.objects.all()
+        print(snippets)
         serializer = SnippetSerializer(snippets, many=True)
         return JsonResponse(serializer.data, safe=False)
 
