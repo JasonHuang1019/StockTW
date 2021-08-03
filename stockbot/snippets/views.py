@@ -42,7 +42,7 @@ def stock_list(request):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        token = 'WLZUkcHUYhjAmqdp4OmdIqkaKiaxHZm4XowYIwa5Bx1'
+        token = ''
         message = 'stock test'
         status = Line_Notify(token, message)
         status ={'status':status}
