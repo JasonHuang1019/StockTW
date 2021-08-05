@@ -4,6 +4,7 @@ from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer,StockSerializer
 import requests
+from snippets.stock_scrapy import total
 
 #%%
 from django.contrib.auth.models import User, Group
@@ -34,6 +35,13 @@ def Line_Notify(token, message):
     r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = param)
     return r.status_code
 
+def Line_Notify_img(token, message, img):
+    headers = {"Authorization": "Bearer " + token}
+    param = {'message': message}
+    image = {'imageFile' : open(str(img), 'rb')}
+    r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = param, files = image)
+    return r.status_code
+
 
 #%%
 @csrf_exempt
@@ -43,10 +51,11 @@ def stock_list(request):
     """
     if request.method == 'GET':
         token = ''
-        message = 'stock test'
-        status = Line_Notify(token, message)
+        title, table = total()
+        status = Line_Notify_img(token, title, 'table.png')
         status ={'status':status}
         # serializer = StockSerializer(status, many=True)
+        
         return JsonResponse(status, safe=False)
 
     elif request.method == 'POST':
