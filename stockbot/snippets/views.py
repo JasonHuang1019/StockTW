@@ -50,7 +50,7 @@ def stock_list(request):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        token = ''
+        token = 'Sy9rJxszlzspDGHBZsarWuA1NuDqSLo6dWkZ09dwxat'
         title, table = total()
         status = Line_Notify_img(token, title, 'table.png')
         status ={'status':status}
