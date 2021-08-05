@@ -25,7 +25,7 @@ python manage.py runserver
 ![image-20210806001141724](https://user-images.githubusercontent.com/21074219/128388209-7416897a-5dff-4d40-b709-ce7ab2d96e7e.png)
 
 
-- 點選進入 http://127.0.0.1:8000/stock，等待一下(5秒) ，Line群組(把Line Notify邀入群組)就會跳出通知。
+- 點選進入 http://127.0.0.1:8000/stock ，等待一下(5秒) ，Line群組(把Line Notify邀入群組)就會跳出通知。
 
 ![image-20210806003535181](https://user-images.githubusercontent.com/21074219/128388231-40f335ba-7e74-4cdf-bb49-5ae98df64668.png)
 
