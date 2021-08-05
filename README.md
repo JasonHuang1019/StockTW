@@ -13,7 +13,7 @@ pip install -r requirements
 
 
 - 進入./StockTW/stockbot/snippets/view.py
-- 修改 token ，登入Line Notify (https://notify-bot.line.me/zh_TW/)，且進入個人頁面，即可看到權杖，將其貼上token即可，然後重新執行。
+- 修改 token ，登入Line Notify (https://notify-bot.line.me/zh_TW/) ，且進入個人頁面，即可看到權杖，將其貼上token即可，然後重新執行。
 
 ![image-20210806002835352](https://user-images.githubusercontent.com/21074219/128388157-6405d6ef-e9ef-4545-8a35-5736227882e8.png)
 
