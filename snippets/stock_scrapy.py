@@ -63,7 +63,7 @@ def total():
     title =  str(year-1911)+'年'+str(month)+'月'+str(day)+'日  三大法人買賣金額統計表'
     
     browser.close()
-    dfi.export(table, 'table.png')
+    dfi.export(table, './snippets/table.png')
     return title, table 
     
 # title, table = total()
