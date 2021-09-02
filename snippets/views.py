@@ -52,7 +52,7 @@ def stock_list(request):
     if request.method == 'GET':
         token = 'Sy9rJxszlzspDGHBZsarWuA1NuDqSLo6dWkZ09dwxat'
         title, table = total()
-        status = Line_Notify_img(token, title, 'table.png')
+        status = Line_Notify_img(token, title, './snippets/table.png')
         status ={'status':status}
         # serializer = StockSerializer(status, many=True)
         
