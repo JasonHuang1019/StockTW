@@ -59,6 +59,7 @@ def total():
     table.買進金額 = table.買進金額.div(100000000)
     table.賣出金額 = table.賣出金額.div(100000000)
     table.買賣差額 = table.買賣差額.div(100000000)
+    table = table.round(1)
     
     title =  str(year-1911)+'年'+str(month)+'月'+str(day)+'日  三大法人買賣金額統計表'
     
