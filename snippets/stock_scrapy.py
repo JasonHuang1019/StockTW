@@ -15,6 +15,7 @@ import datetime
 import time
 import pandas as pd
 import dataframe_image as dfi
+import os 
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
